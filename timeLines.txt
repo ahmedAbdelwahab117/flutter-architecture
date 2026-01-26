@@ -1,0 +1,107 @@
+
+
+ Container(
+                                          height:200.h,
+                                          margin: EdgeInsetsDirectional.only(bottom: 10.h),
+                                          child: _buildTimeline(context),
+                                        ),
+
+
+
+//==============fun==============
+Widget _buildTimeline(BuildContext context) {
+    try {
+      return FallbackTimeline(
+        direction: Axis.horizontal,
+        connectorSpace: 20.w,
+        connectorThickness: 3.0.w,
+        itemCount: passwordValidations.length,
+        itemExtentBuilder: (_, __) =>
+            (MediaQuery.of(context).size.width-100) / passwordValidations.length,
+        oppositeContentsBuilder: (context, index) {
+          return AnimatedContainer(
+            duration: Duration(seconds: 1),
+            curve: Curves.bounceOut,
+            transform: passwordValidations[index]?Matrix4.translationValues(0, index%2==0?-10.h:10.h, 0):
+            Matrix4.translationValues(0, 0, 0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadiusDirectional.circular(10.r),
+              color:passwordValidations[index]?Colors.green:Colors.yellow,
+            ),
+            padding: REdgeInsetsDirectional.all(10),
+            child: Text(
+              passwordValidationsLabels[index].tr(),
+              style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                  fontSize: 8.sp,
+                  fontWeight: FontWeight.bold
+              ),
+            ),
+          );
+        },
+        indicatorBuilder: (_, index) {
+          return FallbackDotIndicator(
+            size: 10.h,
+            color: Theme.of(context).secondaryHeaderColor,
+          );
+        },
+        connectorBuilder: (_, index, type) {
+          return FallbackDecoratedLineConnector(
+            direction: Axis.horizontal,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Theme.of(context).primaryColor,Colors.grey],
+              ),
+            ),
+          );
+        },
+      );
+    } catch (e) {
+      // Fallback to simple row if timeline fails
+      debugPrint('Timeline error: $e');
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: List.generate(passwordValidations.length, (index) {
+          return Column(
+            children: [
+              if (index % 2 == 0)
+                Container(
+                  padding: REdgeInsetsDirectional.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadiusDirectional.circular(10.r),
+                    color: passwordValidations[index]?Colors.green:Colors.yellow,
+                  ),
+                  child: Text(
+                    passwordValidationsLabels[index].tr(),
+                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                        fontSize: 8.sp,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+              SizedBox(height: 10.h),
+              FallbackDotIndicator(
+                size: 10.h,
+                color: Theme.of(context).secondaryHeaderColor,
+              ),
+              SizedBox(height: 10.h),
+              if (index % 2 == 1)
+                Container(
+                  padding: REdgeInsetsDirectional.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadiusDirectional.circular(10.r),
+                    color: passwordValidations[index]?Colors.green:Colors.yellow,
+                  ),
+                  child: Text(
+                    passwordValidationsLabels[index].tr(),
+                    style: Theme.of(context).textTheme.labelSmall!.copyWith(
+                        fontSize: 8.sp,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
+                ),
+            ],
+          );
+        }),
+      );
+    }
+  }
