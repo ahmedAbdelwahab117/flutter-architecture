@@ -1,0 +1,6 @@
+class LogOut {
+  logout(BuildContext context) async {
+    sl<NavigationService>()
+        .navigatePushNamedAndRemoveUntil(RoutesManager.loginScreen);
+  }
+}

@@ -1,0 +1,40 @@
+   Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomProgressRow(
+                        text: StringsManager.excellent,
+                        color: ColorsManager.excellent,
+                        value: .85,
+                      ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      CustomProgressRow(
+                        text: StringsManager.good,
+                        color: ColorsManager.good,
+                        value: .80,
+                      )
+                      ,  SizedBox(
+                        height: 8.h,
+                      ),
+                      CustomProgressRow(
+                        text: StringsManager.average,
+                        color: ColorsManager.average,
+                        value: .75,
+                      ),  SizedBox(
+                        height: 8.h,
+                      ),
+                      CustomProgressRow(
+                        text: StringsManager.bellowAverage,
+                        color: ColorsManager.bellowAverage,
+                        value: .44,
+                      ),  SizedBox(
+                        height: 8.h,
+                      ),
+                      CustomProgressRow(
+                        text: StringsManager.poor,
+                        color: ColorsManager.poor,
+                        value: .15,
+                      )
+                    ],
+                  )

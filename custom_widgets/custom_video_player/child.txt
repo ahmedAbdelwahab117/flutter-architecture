@@ -1,0 +1,4 @@
+FlickVideoPlayer(
+
+                        flickManager: flickManager
+                    ),

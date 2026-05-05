@@ -1,0 +1,19 @@
+ InkWell(
+                                    onTap: () {
+                                      _updateRememberMe(!isRememberMe);
+
+                                    },
+                                    child: CustomCheckBox(
+                                      isSelected: isRememberMe,
+                                      onChanged: (val) async {
+                                        _updateRememberMe(!isRememberMe);
+                                        // setState(() {
+                                        //   isRememberMe = val;
+                                        //   isRememberMe
+                                        //       ? print('Remember Me')
+                                        //       : print('Not Remember Me');
+                                        // });
+                                      },
+                                      title: StringsManager.rememberMe,
+                                    ),
+                                  )

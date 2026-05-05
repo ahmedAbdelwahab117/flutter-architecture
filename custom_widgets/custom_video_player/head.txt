@@ -1,0 +1,21 @@
+late FlickManager flickManager;
+  void initState() {
+    super.initState();
+    flickManager = FlickManager(
+      
+      autoPlay: false,
+      autoInitialize: true,
+      
+      onVideoEnd: () {
+        print('Video Ended');
+      },
+      videoPlayerController: VideoPlayerController.networkUrl(
+          Uri.parse("https://www.w3schools.com/html/mov_bbb.mp4")),
+    );
+  }
+
+  @override
+  void dispose() {
+    flickManager.dispose();
+    super.dispose();
+  }

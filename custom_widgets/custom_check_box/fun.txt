@@ -1,0 +1,39 @@
+ bool isRememberMe = false;
+
+
+  @override
+  void initState() {
+       _loadSavedData();
+    super.initState();
+  }
+
+
+  Future<void> _loadSavedData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isRememberMe = prefs.getBool('remember_me') ?? false;
+      phoneController.text = prefs.getString('phone') ?? '';
+      passwordController.text = prefs.getString('password') ?? '';
+    });
+  }
+
+  Future<void> _saveLoginData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('remember_me', isRememberMe);
+    if (isRememberMe) {
+      await prefs.setString('phone', phoneController.text);
+      await prefs.setString('password', passwordController.text);
+    }
+  }
+
+  Future<void> _updateRememberMe(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isRememberMe = value;
+    });
+
+    if (!isRememberMe) {
+      await prefs.remove('phone');
+      await prefs.remove('password');
+    }
+  }

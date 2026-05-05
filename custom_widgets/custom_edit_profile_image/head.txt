@@ -1,0 +1,9 @@
+XFile? profileImage;
+
+
+
+
+void _chooseProfileImage(XFile? xFile) {
+    profileImage = xFile;
+    setState(() {});
+  }

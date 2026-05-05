@@ -1,0 +1,17 @@
+ void _showDialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return CustomAlertDialog(
+            text: StringsManager.logOutAccountTitle.tr(),
+            image: AssetsManager.logOutDialog,
+            chosen: true,
+            firstButtonText: StringsManager.cancel.tr(),
+            secondButtonText: StringsManager.confirm.tr(),
+            buttonOnTap: () {
+              LogoutCubit.get(context).logOut(logOutRequest: LogOutRequest());
+              LogOut().logout(context);
+            },
+          );
+        });
+  }
